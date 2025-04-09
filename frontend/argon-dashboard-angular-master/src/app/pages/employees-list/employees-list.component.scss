@@ -1,0 +1,23 @@
+.custom-card {
+    max-width: 400px;
+    margin: 30px;
+}
+
+.card-profile {
+    padding: 10px;
+}
+
+.card-avatar img {
+    width: 100px;
+    height: 100px;
+}
+
+.card-body {
+    font-size: 0.9rem;
+}
+
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}

@@ -1,0 +1,157 @@
+<head>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    ::ng-deep .mat-form-field-wrapper{
+      margin-top: -18px !important; /* Adjust this value as needed */
+    }
+  </style>
+</head>
+<div class="header bg-gradient-info py-7 py-lg-8">
+  <div class="container">
+    <div class="header-body text-center mb-3">
+      <div class="row justify-content-center">
+        <div class="col-lg-5 col-md-6">
+          <h1 class="text-white">Welcome!</h1>
+          <p class="text-lead text-light">Fill up the form and create your account.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="separator separator-bottom separator-skew zindex-100">
+    <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
+      <polygon class="fill-default" points="2560 0 2560 100 0 100"></polygon>
+    </svg>
+  </div>
+</div>
+<!-- Page content -->
+<div class="container mt--8 pb-5">
+  <!-- Table -->
+  <div class="row justify-content-center">
+    <div class="col-lg-5 col-md-7">
+      <div class="card bg-secondary shadow border-0">
+        <div class="card-body px-lg-5 py-lg-5">
+          <div class="text-center text-muted mb-4">
+            <small>Sign up with credentials</small>
+          </div>
+          <form role="form">
+            <div class="form-group mb-3">
+              <div class="input-group input-group-alternative">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ni ni-circle-08"></i></span>
+                </div>
+                <mat-form-field class="form-control" floatLabel="never">
+                  <mat-label>Name</mat-label>
+                  <input matInput [formControl]="name" [(ngModel)] = "clientCreation.imeKlijenta" required>
+                  <mat-error style="color: red; font-size: 9px;" *ngIf="name.invalid">{{getErrorMessageName()}}</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="form-group mb-3">
+              <div class="input-group input-group-alternative">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ni ni-circle-08"></i></span>
+                </div>
+                <mat-form-field class="form-control" floatLabel="never">
+                  <mat-label>Surname</mat-label>
+                  <input matInput [formControl]="surname" [(ngModel)] = "clientCreation.prezimeKlijenta" required>
+                  <mat-error style="color: red; font-size: 9px;" *ngIf="surname.invalid">{{getErrorMessageSurname()}}</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="form-group mb-3">
+              <div class="input-group input-group-alternative">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ni ni-single-copy-04"></i></span>
+                </div>
+                <mat-form-field class="form-control" floatLabel="never">
+                  <mat-label>Date of birth</mat-label>
+                  <input matInput [matDatepicker]="picker" [formControl]="dateOfBirth" [(ngModel)] = "date" required>
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                  <mat-error style="color: red; font-size: 9px;" *ngIf="dateOfBirth.invalid">{{getErrorMessageDateOfBirth()}}</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="form-group mb-3">
+              <div class="input-group input-group-alternative">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ni ni-square-pin"></i></span>
+                </div>
+                <mat-form-field class="form-control" floatLabel="never">
+                  <mat-label>Address</mat-label>
+                  <input matInput [formControl]="address" [(ngModel)] = "clientCreation.adresa" required>
+                  <mat-error style="color: red; font-size: 9px;" *ngIf="address.invalid">{{getErrorMessageAddress()}}</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="form-group mb-3">
+              <div class="input-group input-group-alternative">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ni ni-mobile-button"></i></span>
+                </div>
+                <mat-form-field class="form-control" floatLabel="never">
+                  <mat-label>Contact</mat-label>
+                  <input matInput [formControl]="contact" [(ngModel)] = "clientCreation.kontakt" required>
+                  <mat-error style="color: red; font-size: 9px;" *ngIf="contact.invalid">{{getErrorMessageContact()}}</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="form-group mb-3">
+              <div class="input-group input-group-alternative">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                </div>
+                <mat-form-field class="form-control" floatLabel="never">
+                  <mat-label>Email</mat-label>
+                  <input matInput [formControl]="email" [(ngModel)] = "clientCreation.emailKlijenta" required>
+                  <mat-error style="color: red; font-size: 9px;" *ngIf="email.invalid">{{getErrorMessageEmail()}}</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="form-group mb-3">
+              <div class="input-group input-group-alternative">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ni ni-single-02"></i></span>
+                </div>
+                <mat-form-field class="form-control" floatLabel="never">
+                  <mat-label>Username</mat-label>
+                  <input matInput [formControl]="username" [(ngModel)] = "clientCreation.korisnickoImeKlijenta" required>
+                  <mat-error style="color: red; font-size: 9px;" *ngIf="username.invalid">{{getErrorMessageUsername()}}</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group input-group-alternative">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+                </div>
+                <mat-form-field class="form-control" floatLabel="never">
+                  <mat-label>Password</mat-label>
+                  <input matInput [formControl]="password" [(ngModel)] = "clientCreation.lozinkaKlijenta" required [type]="hide ? 'password' : 'text'">
+                  <button mat-icon-button matSuffix (click)="hide = !hide" style="background-color: white; margin-top: -15px; color: #ADB5BD;">
+                    <i class="material-icons">{{hide ? 'visibility_off' : 'visibility'}}</i>
+                  </button>
+                  <mat-error style="color: red; font-size: 9px;" *ngIf="password.invalid">{{getErrorMessagePassword()}}</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="custom-control custom-control-alternative custom-checkbox">
+              <input class="custom-control-input" id=" customCheckLogin" type="checkbox" [(ngModel)]="privacyPolicyChecked">
+              <label class="custom-control-label" for=" customCheckLogin">
+                <span class="text-muted">I agree to the <u style="color: #11CDEF;">terms of service</u>.</span>
+              </label>
+            </div>
+            <div class="text-center">
+              <button type="button" class="btn btn-info my-4"(click)="register()">Sign up</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="row mt-2 justify-content-center">
+        <div class="col text-center">
+          <a class="text-light" [routerLink]="['/login']"><small>Already have an account?</small></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

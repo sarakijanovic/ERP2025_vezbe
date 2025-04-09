@@ -1,0 +1,34 @@
+<h1 mat-dialog-title class="text-center">
+    Update order
+</h1>
+<form [formGroup]="orderForm" (ngSubmit)="onSubmit()">
+    <div mat-dialog-content style="width: 100%;">
+        <mat-form-field style="width: 100%;">
+            <input placeholder="Client" matInput [value]="data.order.zaposleni" disabled>
+        </mat-form-field><br>
+        <mat-form-field style="width: 100%;">
+            <mat-label>{{data.order.zaposleni}}</mat-label>
+            <mat-select [(ngModel)]="data.order.zaposleniID" formControlName="zaposleniID">
+                <mat-option *ngFor="let employee of data.employees" [value]="employee.zaposleniID">
+                {{employee.imeZaposlenog}} {{employee.prezimeZaposlenog}} 
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field style="width: 100%;">
+            <input placeholder="Order date" matInput [value]="data.order.datumPorudzbine" disabled>
+        </mat-form-field><br>
+        <mat-checkbox [(ngModel)]="data.order.dostavljena" formControlName="dostavljena">
+            Payed
+        </mat-checkbox>        
+    </div>
+    <div mat-dialog-actions class="justify-content-center">
+        <button mat-raised-button type="submit" class="btn btn-white" [disabled]="orderForm.invalid" style="background-color: #11CCEF; color: white;">
+            Submit
+            <div class="ripple-container"></div>
+        </button>
+        <button mat-raised-button type="button" class="btn btn-white" (click)="onClose()">
+            Close
+            <div class="ripple-container"></div>
+        </button>
+    </div>
+</form>

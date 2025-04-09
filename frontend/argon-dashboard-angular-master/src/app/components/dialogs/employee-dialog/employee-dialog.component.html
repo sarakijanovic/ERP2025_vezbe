@@ -1,0 +1,82 @@
+<head>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    ::ng-deep .mat-form-field-wrapper{
+      margin-top: -18px !important; /* Adjust this value as needed */
+    }
+  </style>
+</head>
+<h1 mat-dialog-title class="text-center">
+    {{ data.isEdit ? 'Update employee' : 'Create new employee' }}
+</h1>
+<form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+    <div mat-dialog-content style="width: 100%;">
+        <mat-form-field style="width: 100%;">
+            <input placeholder="Username" matInput formControlName="korisnickoImeZaposlenog">
+            <mat-error *ngIf="employeeForm.controls.korisnickoImeZaposlenog.invalid && (employeeForm.controls.korisnickoImeZaposlenog.dirty || employeeForm.controls.korisnickoImeZaposlenog.touched)">
+                Username is required!
+            </mat-error>
+        </mat-form-field><br>
+        <mat-form-field style="width: 100%;">
+            <input placeholder="Name" matInput formControlName="imeZaposlenog">
+            <mat-error *ngIf="employeeForm.controls.imeZaposlenog.invalid && (employeeForm.controls.imeZaposlenog.dirty || employeeForm.controls.imeZaposlenog.touched)">
+                Name is required!
+            </mat-error>
+        </mat-form-field><br>
+        <mat-form-field style="width: 100%;">
+            <input placeholder="Surname" matInput formControlName="prezimeZaposlenog">
+            <mat-error *ngIf="employeeForm.controls.prezimeZaposlenog.invalid && (employeeForm.controls.prezimeZaposlenog.dirty || employeeForm.controls.prezimeZaposlenog.touched)">
+                Surname is required!
+            </mat-error>
+        </mat-form-field><br>
+        <mat-form-field style="width: 100%;">
+            <input placeholder="Email" matInput formControlName="emailZaposlenog">
+            <mat-error *ngIf="employeeForm.controls.emailZaposlenog.invalid && (employeeForm.controls.emailZaposlenog.dirty || employeeForm.controls.emailZaposlenog.touched)">
+                <ng-container *ngIf="employeeForm.controls.emailZaposlenog.errors.required">
+                    Email is required!
+                </ng-container>
+                <ng-container *ngIf="employeeForm.controls.emailZaposlenog.errors.email">
+                    Invalid email format!
+                </ng-container>
+            </mat-error>
+        </mat-form-field><br> 
+        <mat-form-field style="width: 100%;">
+            <input placeholder="JMBG" matInput formControlName="jmbg">
+            <mat-error *ngIf="employeeForm.controls.jmbg.invalid && (employeeForm.controls.jmbg.dirty || employeeForm.controls.jmbg.touched)">
+                <ng-container *ngIf="employeeForm.controls.jmbg.errors.pattern">
+                    JMBG must be a number!
+                </ng-container>
+                <ng-container *ngIf="employeeForm.controls.jmbg.errors.maxLength">
+                    JMBG cannot exceed 13 characters!
+                </ng-container>
+            </mat-error>
+        </mat-form-field><br>
+        <mat-form-field style="width: 100%;">
+            <mat-label >{{data.employee.uloga}}</mat-label>
+            <mat-select formControlName="ulogaID" placeholder="Role">
+                <mat-option *ngFor="let role of data.roles" [value]="role.ulogaID">
+                    {{role.nazivUloge}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>           
+        <mat-form-field style="width: 100%;">
+            <input placeholder="Password" matInput formControlName="lozinkaZaposlenog" [type]="hide ? 'password' : 'text'">
+            <button mat-icon-button matSuffix (click)="hide = !hide" style="background-color: white; margin-top: -15px; color: #ADB5BD;">
+                <i class="material-icons">{{hide ? 'visibility_off' : 'visibility'}}</i>
+            </button>
+            <mat-error *ngIf="employeeForm.controls.lozinkaZaposlenog.invalid && (employeeForm.controls.lozinkaZaposlenog.dirty || employeeForm.controls.lozinkaZaposlenog.touched)">
+                Password is required!
+            </mat-error>
+        </mat-form-field><br>    
+    </div>
+    <div mat-dialog-actions class="justify-content-center">
+        <button mat-raised-button type="submit" class="btn btn-white" [disabled]="employeeForm.invalid" style="background-color: #11CCEF; color: white;">
+            Submit
+            <div class="ripple-container"></div>
+        </button>
+        <button mat-raised-button type="button" class="btn btn-white" (click)="onClose()">
+            Close
+            <div class="ripple-container"></div>
+        </button>
+    </div>
+</form>

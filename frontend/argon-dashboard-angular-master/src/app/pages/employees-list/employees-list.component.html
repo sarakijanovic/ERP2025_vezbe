@@ -1,0 +1,53 @@
+<head>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+      .button-container {
+        display: flex;
+        justify-content: flex-end;
+        padding-right: 15px; /* Adjust padding as necessary */
+      }
+    </style>
+  </head>
+  <div class="header bg-gradient-info pb-8 pt-5 pt-md-8">
+    <div class="container-fluid">
+      <div class="header-body">
+        <div class="button-container" *ngIf="role === 'Admin'">
+          <button mat-raised-button type="submit" class="btn" (click)="createWatercooler()" style="background-color: #11CCEF;">
+            <i class="material-icons" style="color: white;">add</i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid mt--7">
+    <div class="row">
+      <div class="col-md-4 custom-card" *ngFor="let employee of employees">
+        <div class="card card-profile">
+          <div class="card-avatar text-center">
+            <a href="javascript:void(0)">
+              <img class="img" src="https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg?t=st=1717780937~exp=1717784537~hmac=0ea9f74542feda15bcb79bed16a15f04bf22a87c8fea995c097a3bd97a1420cb&w=740" />
+            </a>
+          </div>
+          <div class="card-body">
+            <h4 class="card-title">Username: {{ employee.korisnickoImeZaposlenog }}</h4>
+            <p class="card-description">
+              <b>Email:</b> {{ employee.emailZaposlenog }} <br>
+              <b>Name:</b> {{ employee.imeZaposlenog }} <br>
+              <b>Surname:</b> {{ employee.prezimeZaposlenog }}<br>
+              <b>JMBG:</b> {{ employee.jmbg }}<br>
+              <b>Role:</b> {{ employee.uloga }}<br>
+            </p>
+            <div class="button-group" *ngIf="role === 'Admin'">
+              <button class="btn btn-success btn-round" (click)="updateEmployee(employee)">
+                <i class="fa fa-edit"></i>
+              </button>
+              <button class="btn btn-danger btn-round" (click)="deleteEmployee(employee)">
+                <i class="fa fa-trash"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

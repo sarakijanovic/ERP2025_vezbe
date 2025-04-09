@@ -1,0 +1,112 @@
+<head>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    /* Ensure dropdown menu has a high z-index */
+    .dropdown-menu {
+      z-index: 1000; /* Adjust as needed */
+    }
+
+    /* Ensure parent elements allow overflow */
+    .table-responsive {
+      overflow: visible !important;
+    }
+
+    .card {
+      overflow: visible !important;
+    }
+  </style>
+</head>
+<body>
+  <div class="header bg-gradient-info pb-8 pt-5 pt-md-8">
+    <div class="container-fluid">
+      <div class="header-body">
+      </div>
+    </div>
+  </div>
+  <!-- Page content -->
+  <div class="container-fluid mt--7">
+    <!-- Table -->
+    <div class="row">
+      <div class="col">
+        <div class="card shadow">
+          <div class="card-header">
+            <h3 class="mb-0 text-center">Watercoolers</h3>
+          </div>        
+          <div class="table-responsive">
+            <table class="table align-items-center table-flush">
+              <thead class="thead-light">
+                <tr>
+                  <th scope="col">Model</th>
+                  <th scope="col">Company</th>
+                  <th scope="col">Price</th>
+                  <th scope="col">On stock</th>
+                  <th scope="col">Watercooler type</th>
+                  <th scope="col" *ngIf="role === 'Admin'"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let watercooler of watercoolers">
+                  <th scope="row">
+                    <div class="media align-items-center">
+                      <a class="avatar rounded-circle mr-3">
+                        <img alt="Watercooler" [src]="watercooler.slikaURL">
+                      </a>
+                      <div class="media-body">
+                        <span class="mb-0 text-sm">{{watercooler.model}}</span>
+                      </div>
+                    </div>
+                  </th>
+                  <td>
+                    {{watercooler.proizvodjac}}
+                  </td>
+                  <td>
+                    {{watercooler.cena}} RSD
+                  </td>
+                  <td>{{watercooler.kolicinaNaStanju}}</td>
+                  <td>{{watercooler.tipAparataNaziv}}</td>
+                  <td class="text-right" *ngIf="role === 'Admin'">
+                    <div ngbDropdown placement="bottom-right" style="z-index: 1000;">
+                      <a class="btn btn-sm btn-icon-only text-light" ngbDropdownToggle>
+                        <i class="fas fa-ellipsis-v"></i>
+                      </a>
+                      <div ngbDropdownMenu class="dropdown-menu-right dropdown-menu-arrow" style="z-index: 1000;">
+                        <a class="dropdown-item" (click)="updateWatercooler(watercooler)">Update</a>
+                        <a class="dropdown-item" (click)="deleteWatercooler(watercooler)">Delete</a>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="card-footer py-4 d-flex justify-content-between align-items-center">
+            <div *ngIf="role === 'Admin'">
+              <button mat-raised-button type="submit" class="btn" (click)="createWatercooler()" style="background-color: #11CCEF;">
+                <i class="material-icons" style="color: white;">add</i>
+              </button>
+            </div>
+            <nav aria-label="...">
+              <ul class="pagination mb-0">
+                <li class="page-item">
+                  <button class="page-link" (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1" tabindex="-1">
+                    <i class="fas fa-angle-left"></i>
+                    <span class="sr-only">Previous</span>
+                  </button>
+                </li>
+                <li class="page-item">
+                  <a class="page-link" style="background-color: #11CCEF; color: white;">{{currentPage}}<span class="sr-only"></span></a>
+                </li>
+                <li class="page-item">
+                  <button class="page-link" (click)="changePage(currentPage + 1)" [disabled]="disabledForward" tabindex="-1">
+                    <i class="fas fa-angle-right"></i>
+                    <span class="sr-only">Next</span>
+                  </button>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>

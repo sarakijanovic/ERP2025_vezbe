@@ -1,0 +1,60 @@
+<head>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+  <h1 mat-dialog-title class="text-center mt-5">
+      Order details
+  </h1>
+  <!-- Page content -->
+  <div mat-dialog-content class="container-fluid mt--7">
+    <!-- Table -->
+    <div class="row">
+      <div class="col">
+        <div class="card shadow">
+          <div class="card-header">
+            <h3 class="mb-0 text-center">Watercoolers</h3>
+          </div>
+          <div class="table-container">
+            <div class="table-responsive">
+              <table class="table align-items-center table-flush">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col">Model</th>
+                    <th scope="col">Company</th>
+                    <th scope="col">Price</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let watercooler of data.watercoolers">
+                    <th scope="row">
+                      <div class="media align-items-center">
+                        <a class="avatar rounded-circle mr-3">
+                          <img alt="Watercooler" [src]="watercooler.slikaURL">
+                        </a>
+                        <div class="media-body">
+                          <span class="mb-0 text-sm">{{watercooler.model}}</span>
+                        </div>
+                      </div>
+                    </th>
+                    <td>
+                      {{watercooler.proizvodjac}}
+                    </td>
+                    <td>
+                      {{watercooler.cena}} RSD
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div mat-dialog-actions class="justify-content-center">
+      <button mat-raised-button type="button" class="btn btn-info" (click)="onClick()">
+          Close
+          <div class="ripple-container"></div>
+      </button>
+    </div>
+  </div>
+</body>

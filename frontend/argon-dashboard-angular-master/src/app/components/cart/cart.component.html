@@ -1,0 +1,64 @@
+<head>
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://js.stripe.com">
+</head>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+<div class="header bg-gradient-info pb-8 pt-5 pt-md-8">
+    <div class="container-fluid">
+        <div class="header-body">
+            <!-- Card stats -->
+            <div class="row mt-3 justify-content-center">
+                <div class="card card-stats mb-4 mb-xl-5 text-center" *ngIf="!cartItems" style="width: 40%;"> 
+                    <span class="text-uppercase text-muted mb-0 justify-content-center">
+                    Your cart is empty!<br><span class="text-info">Please search for watercoolers on products page.</span> 
+                    </span>
+                </div>
+            </div>
+            <div *ngIf="cartItems">
+                <div class="row mt-3 justify-content-center" *ngFor="let item of cartItems">
+                    <div class="card card-stats" style="width: 80%;">
+                        <div class="card-body d-flex align-items-center">
+                            <div class="col-md-2 d-flex justify-content-center">
+                                <div class="icon icon-shape text-white rounded-circle" style="width: 120px; height: 120px;">
+                                    <img alt="{{item.model}} image" [src]="item.slikaURL" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%; border: 2px solid #11BBEF;">
+                                </div>
+                            </div>
+                            <div class="col-md-5 d-flex flex-column">
+                                <h5 class="card-title text-uppercase text-muted mb-0">Model</h5>
+                                <span class="h2 font-weight-bold mb-0">{{item.model}}</span>
+                                <div class="row ml-0">
+                                    <span class="text-success">Company:</span>
+                                    <span class="text-nowrap">{{item.proizvodjac}}</span>
+                                </div>
+                            </div>
+                            <div class="col-md-5 d-flex justify-content-end align-items-center">
+                                <div class="d-flex flex-column text-right mr-5">
+                                    <span class="text-nowrap mb-2">Quantity: {{item.kolicina}}</span>
+                                    <h5 class="card-title text-uppercase text-info mb-0">Price:</h5>
+                                    <div class="row justify-content-end mr-0">
+                                        <span class="h2 font-weight-bold mb-1">{{item.cena * item.kolicina}}<span class="text-muted"> rsd</span></span>
+                                    </div>
+                                </div>
+                                <span class="material-symbols-outlined ml-2" style="cursor: pointer;" (click) = "removeFromCart()">
+                                    shopping_cart_off
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3 justify-content-center mx-auto" style="width: 80%;" *ngIf="cartItems">
+                <div class="card card-stats ml-auto mb-3">
+                    <div class="card-body d-flex align-items-center justify-content-end">
+                        <span class="text-nowrap mb-0 mr-2">Total price: </span>
+                        <span class="h2 font-weight-bold mb-1">{{totalPrice}}<span class="text-muted"> rsd</span></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 d-flex justify-content-end" style="width: 91%;" *ngIf="cartItems">
+                <button mat-raised-button type="submit" class="btn btn-white" style="background-color: #11CCEF; color: white;" (click)="pay()">
+                    Pay
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

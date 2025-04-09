@@ -1,0 +1,55 @@
+<h1 mat-dialog-title class="text-center">
+    {{ data.isEdit ? 'Update watercooler' : 'Create new watercooler' }}
+</h1>
+<form [formGroup]="watercoolerForm" (ngSubmit)="onSubmit()">
+    <div mat-dialog-content style="width: 100%;">
+        <mat-form-field style="width: 100%;">
+            <input placeholder="Model" matInput formControlName="model">
+            <mat-error *ngIf="watercoolerForm.controls.model.invalid && (watercoolerForm.controls.model.dirty || watercoolerForm.controls.model.touched)">
+                Model is required
+            </mat-error>
+        </mat-form-field><br>
+        <mat-form-field style="width: 100%;">
+            <input placeholder="Maker" matInput formControlName="proizvodjac">
+            <mat-error *ngIf="watercoolerForm.controls.proizvodjac.invalid && (watercoolerForm.controls.proizvodjac.dirty || watercoolerForm.controls.proizvodjac.touched)">
+                Maker is required
+            </mat-error>
+        </mat-form-field><br>
+        <mat-form-field style="width: 100%;">
+            <input placeholder="Description" matInput formControlName="opis">
+        </mat-form-field><br>
+        <mat-form-field style="width: 100%;">
+            <input placeholder="Image URL" matInput formControlName="slikaURL">
+        </mat-form-field><br>
+        <mat-form-field style="width: 100%;">
+            <input placeholder="Price" matInput formControlName="cena">
+            <mat-error *ngIf="watercoolerForm.controls.cena.invalid && (watercoolerForm.controls.cena.dirty || watercoolerForm.controls.cena.touched)">
+                Price must be a number with one or two digits after the decimal point!
+            </mat-error>
+        </mat-form-field><br>
+        <mat-form-field style="width: 100%;">
+            <input placeholder="Quantity" matInput formControlName="kolicinaNaStanju">
+            <mat-error *ngIf="watercoolerForm.controls.kolicinaNaStanju.invalid && (watercoolerForm.controls.kolicinaNaStanju.dirty || watercoolerForm.controls.kolicinaNaStanju.touched)">
+                Quantity must be a number!
+            </mat-error>
+        </mat-form-field><br>
+        <mat-form-field style="width: 100%;">
+            <mat-label>{{data.watercooler.tipAparataNaziv}}</mat-label>
+            <mat-select [(ngModel)]="data.watercooler.tipAparataID" formControlName="tipAparataID">
+                <mat-option *ngFor="let watercoolerType of data.watercoolerTypes" [value]="watercoolerType.tipAparataID">
+                {{watercoolerType.nazivTipa}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div mat-dialog-actions class="justify-content-center">
+        <button mat-raised-button type="submit" class="btn btn-white" [disabled]="watercoolerForm.invalid" style="background-color: #11CCEF; color: white;">
+            Submit
+            <div class="ripple-container"></div>
+        </button>
+        <button mat-raised-button type="button" class="btn btn-white" (click)="onClose()">
+            Close
+            <div class="ripple-container"></div>
+        </button>
+    </div>
+</form>

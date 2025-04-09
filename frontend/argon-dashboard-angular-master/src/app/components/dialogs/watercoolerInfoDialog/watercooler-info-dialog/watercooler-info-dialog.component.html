@@ -1,0 +1,78 @@
+<h1 mat-dialog-title class="text-center">
+    Product info
+</h1>
+<div mat-dialog-content>
+    <div class="card card-stats mb-xl-2">
+        <div class="card-body">
+        <div class="row">
+            <div class="col">
+            <h5 class="card-title text-uppercase text-muted mb-0">Model</h5>
+            <span class="h2 font-weight-bold mb-0">{{data.watercooler.model}}</span>
+            </div>
+        </div>
+        <div class="row mt-2 text-center">
+            <div class="col">
+            <div class="avatar rounded shadow" style="width: 170px; height: 170px; overflow: hidden; background-color: white; border: 2px solid #11BBEF">
+                <img alt="Watercooler" [src]="data.watercooler.slikaURL" style="width: 100%; height: 100%; object-fit: cover; border-radius: 5px;">
+            </div>
+            </div>
+        </div>
+        <div class="row">
+            <p class="mt-0 mb-0 text-muted text-sm">
+                <span class="text-success mr-2">Company:</span>
+                <span class="text-nowrap">{{data.watercooler.proizvodjac}}</span>
+            </p>
+        </div>
+        <div class="row">
+            <p class="mt-0 mb-0 text-muted text-sm">
+                <span class="text-success mr-2">Watercooler type:</span>
+                <span class="text-nowrap">{{data.watercooler.tipAparataNaziv}}</span>
+            </p>
+        </div>
+        <div class="row">
+            <p class="mt-0 mb-0 text-muted text-sm description-text">
+                <span class="text-success mr-2">Description:</span>
+                <span class="text-wrap">{{data.watercooler.opis}}</span>
+            </p>
+        </div>  
+        <p class="mt-2 mb-1 text-muted text-sm text-right">
+            <span class="h2 font-weight-bold mb-1">{{data.watercooler.cena}} <span class="text-muted">rsd</span></span>
+        </p>  
+        </div>
+    </div>
+</div>
+<div mat-dialog-actions >
+    <div class="row justify-content-center" *ngIf="role">
+        <nav aria-label="...">
+            <ul class="pagination mb-1">
+                <li class="page-item" >
+                <button class="page-link" tabindex="-1" (click) ="quantity == 0 ? quantity = 0 : quantity = quantity - 1">
+                    <i class="ni ni-fat-delete"></i>
+                </button >
+                </li>
+                <li class="page-item">
+                <a class="page-link"  style="background-color: #11CCEF; color: white;">{{quantity}}</a>
+                </li>
+                <li class="page-item">
+                <button  class="page-link" tabindex="-1" (click) ="quantity == data.watercooler.kolicinaNaStanju ? quantity = data.watercooler.kolicinaNaStanju : quantity = quantity + 1">
+                    <i class="ni ni-fat-add"></i>
+                </button >
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div class="row">
+        <div class="col text-left" *ngIf="role">
+            <button mat-raised-button type="submit" class="btn btn-white" (click) = "addToCart()"  style="background-color: #11CCEF; color: white;">
+                Add to cart
+                <div class="ripple-container"></div>
+            </button>
+        </div>
+        <div class="col text-right">
+            <button mat-raised-button type="submit" class="btn btn-white" (click)="onClick()">
+                Close
+                <div class="ripple-container"></div>
+            </button>
+        </div>
+    </div>
+</div>

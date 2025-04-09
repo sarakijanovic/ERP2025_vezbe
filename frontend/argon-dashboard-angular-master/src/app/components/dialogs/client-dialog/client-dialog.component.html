@@ -1,0 +1,79 @@
+<head>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+      ::ng-deep .mat-form-field-wrapper{
+        margin-top: -18px !important;
+      }
+    </style>
+  </head>
+  <h1 mat-dialog-title class="text-center">
+      Update client
+  </h1>
+  <form [formGroup]="clientForm" (ngSubmit)="onSubmit()">
+      <div mat-dialog-content style="width: 100%;">
+          <mat-form-field style="width: 100%;">
+              <input placeholder="Name" matInput formControlName="imeKlijenta">
+              <mat-error *ngIf="clientForm.controls.imeKlijenta.invalid && (clientForm.controls.imeKlijenta.dirty || clientForm.controls.imeKlijenta.touched)">
+                  Name is required!
+              </mat-error>
+          </mat-form-field><br>
+          <mat-form-field style="width: 100%;">
+              <input placeholder="Surname" matInput formControlName="prezimeKlijenta">
+              <mat-error *ngIf="clientForm.controls.prezimeKlijenta.invalid && (clientForm.controls.prezimeKlijenta.dirty || clientForm.controls.prezimeKlijenta.touched)">
+                  Surname is required!
+              </mat-error>
+          </mat-form-field><br>
+          <mat-form-field style="width: 100%;">
+              <input placeholder="Email" matInput formControlName="emailKlijenta">
+              <mat-error *ngIf="clientForm.controls.emailKlijenta.invalid && (clientForm.controls.emailKlijenta.dirty || clientForm.controls.emailKlijenta.touched)">
+                  <ng-container *ngIf="clientForm.controls.emailKlijenta.errors.required">
+                      Email is required!
+                  </ng-container>
+                  <ng-container *ngIf="clientForm.controls.emailKlijenta.errors.email">
+                      Invalid email format!
+                  </ng-container>
+              </mat-error>
+          </mat-form-field><br> 
+          <mat-form-field style="width: 100%;">
+          <input placeholder="Address" matInput formControlName="adresa">
+              <mat-error *ngIf="clientForm.controls.adresa.invalid && (clientForm.controls.adresa.dirty || clientForm.controls.adresa.touched)">
+                  Address is required!
+              </mat-error>
+          </mat-form-field><br>
+          <mat-form-field style="width: 100%;">
+            <input placeholder="Contact" matInput formControlName="kontakt">
+                <mat-error *ngIf="clientForm.controls.kontakt.invalid && (clientForm.controls.kontakt.dirty || clientForm.controls.kontakt.touched)">
+                    Contact is required!
+                </mat-error>
+            </mat-form-field><br>
+          <mat-form-field style="width: 100%;" floatLabel="never">
+            <mat-label>Date of birth</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="datumRodjenja" [(ngModel)] = "date" required>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="clientForm.controls.datumRodjenja.invalid && (clientForm.controls.datumRodjenja.dirty || clientForm.controls.datumRodjenja.touched)">
+                Date is required!
+            </mat-error>
+          </mat-form-field>       
+          <mat-form-field style="width: 100%;">
+              <input placeholder="Password" matInput formControlName="lozinkaKlijenta" [type]="hide ? 'password' : 'text'">
+              <button mat-icon-button matSuffix (click)="hide = !hide" style="background-color: white; margin-top: -15px; color: #ADB5BD;">
+                  <i class="material-icons">{{hide ? 'visibility_off' : 'visibility'}}</i>
+              </button>
+              <mat-error *ngIf="clientForm.controls.lozinkaKlijenta.invalid && (clientForm.controls.lozinkaKlijenta.dirty || clientForm.controls.lozinkaKlijenta.touched)">
+                  Password is required!
+              </mat-error>
+          </mat-form-field><br>    
+      </div>
+      <div mat-dialog-actions class="justify-content-center">
+          <button mat-raised-button type="submit" class="btn btn-white" [disabled]="clientForm.invalid" style="background-color: #11CCEF; color: white;">
+              Submit
+              <div class="ripple-container"></div>
+          </button>
+          <button mat-raised-button type="button" class="btn btn-white" (click)="onClose()">
+              Close
+              <div class="ripple-container"></div>
+          </button>
+      </div>
+  </form>
+  
